@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="React and Canvas" />
+    <title>Canvas</title>
+    <script>
+        const regenerate = () => {
+            let canvas = document.querySelector('canvas');
+            let context = canvas.getContext('2d');
+            const width = 50;
+            const height = 50;
+            const gap = 20;
+            const offset = width + gap;
+            context.clearRect(0, 0, 600, 600);
+            context.fillStyle = "white";
+            context.fillRect(50, 50, 500, 500);
+            let x, y;
+            for (let i = 0; i < 5; i++) {
+                for (let j = 0; j < 5; j++) {
+                    x = 130 + (offset) * i;
+                    y = 130 + (offset) * j;
+                    context.strokeStyle = "black";
+                    context.beginPath();
+                    context.rect(x, y, width, height);
+                    context.stroke();
+                    if (Math.random() > 0.5) {
+                        context.strokeStyle = '#5858e7';
+                        context.beginPath();
+                        context.rect(x - 5, y - 5, width - 10, height - 10);
+                        // context.stroke();
+                    }
+                    else {
+                        context.strokeStyle = "gray";
+                        context.fillStyle = "gray";
+                        context.beginPath();
+                        // context.rect(x + 15, y + 15, width - 10, height - 10);
+                        context.arc(x + 25, y + 25, width / 2 - 10, 0, Math.PI * 2);
+                        context.stroke();
+                        context.fill();
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .canvasContainer {
+            margin: 2vw;
+            padding: 2vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 3vw;
+        }
+
+        .canvasDraw {
+            background: linear-gradient(to bottom, lavender, pink, pink, lavender);
+        }
+
+        #random {
+            background: transparent;
+            width: 10vw;
+            height: 8vw;
+            color: purple;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            border-radius: 2vw;
+        }
+
+        #random:hover {
+            color: white;
+            background-color: purple;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body onload="regenerate()">
+    <div class='canvasContainer'>
+        <div class='canvasDraw'>
+            <canvas width="600" height="600"></canvas>
+        </div>
+        <div class='canvasControl'>
+            <button id="random" onclick="regenerate()">Regenerate</button>
+        </div>
+    </div>
+</body>
+
+</html>
